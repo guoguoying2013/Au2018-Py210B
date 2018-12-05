@@ -1,45 +1,25 @@
 #!usr/bin/env python
 
-donors_list = [('Aron King', [1, 2]), ('Becky Patty', [3000, 1000]),
-               ('Charlie Lee', [666, 222]), ('Thomas Dave', [202, 90, 450]), ('Nancy Crow', [100, 200, 300])]
-# input from Mairoom_Part1. Convert into a dict
-
-donors_dict = {x: y for x, y in donors_list}
+donors_dict = {'Aron King': [1, 2], 'Becky Patty': [3000, 1000], 'Charlie Lee': [666, 222], 'Thomas Dave':[202, 90, 450], 'Nancy Crow': [100, 200, 300]}
 
 def thanks_email():
     while True:
         name_input = input("Enter full name of a donor>>>").title()
         if name_input == 'List': print(list(donors_dict))
         else:
-            if name_input in donors_dict:
+            try:
+                donation_amount = int(input('Enter donation amount: '))
+                donors_dict.setdefault(name_input, []).append(donation_amount)
                 d = {}
                 d['name'] = name_input
-                while True:
-                    try:
-                        donation_amount = int(input('Enter donation amount: '))
-                    except ValueError:
-                        print ('Please enter current value, entry should be an integer.')
-                    else:
-                        donors_dict[name_input].append(donation_amount)
-                        d['donation'] = donation_amount
-                        print("\nDear {name},\n\tThank you for generous donation of ${donation:.2f} to ZYX charity\n"
-                          "Sincerely,\nZYX Team".format(**d))
-                        return
-            else:
-                while True:
-                    d = {}
-                    d['name'] = name_input
-                    try:
-                        donation_amount = int(input('Enter donation amount: '))
-                    except ValueError:
-                        print ('Please enter a current value, entry should be an integer.')
-                    else:
-                        donors_dict[name_input] = [donation_amount]
-                        d['donation'] = donation_amount
-                        #dict_format(seq,name_input)
-                        print("\nDear {name},\n\tThank you for generous donation of ${donation:.2f} to ZYX charity\n"
-                          "Sincerely,\nZYX Team".format(**d))
-                        return
+                d['donation'] = donation_amount
+                print("\nDear {name},\n\tThank you for generous donation of ${donation:.2f} to ZYX charity\n"
+                      "Sincerely,\nZYX Team".format(**d))
+                return
+
+            except ValueError:
+                print ('Please enter a value, entry should be an integer.')
+                return
 
 def sort_key(sorting):
     return sorting[1]
@@ -85,13 +65,9 @@ def main ():
             response = input("MAIN MENU\nDonors and donations made to XYZ organisation.\nPlease select one of the option"
                          " below to proceed.\n1.Send a Thank you message to the donor\n2.Create a report\n3.Send "
                             "letters to all donors\n4. Quit\n>>>")
-
-            if not response in dict_list:
-                print ('Invalid input.\nPlease select correct option')
-            else:
-                dict_list.get(response)()
-        except ValueError:
-            print ('Invalid option') # not sure of this !
+            dict_list[response]()
+        except KeyError:
+            print ("Invalid input.\nPlease select correct option")
         finally:
             print ('Thank You\n\n')
 

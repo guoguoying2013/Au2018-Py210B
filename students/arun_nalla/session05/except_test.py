@@ -38,4 +38,4 @@ def more_fun(language):
 def last_fun():
     print(cust, cheese)
     time.sleep(1)
-    import antigravity
+    #import antigravity

@@ -8,6 +8,7 @@ Mailroom3 assignment
 
 import os
 import random
+import re
 import sys
 
 donor_db = {"William Gates, III": [653772.32, 12.17],
@@ -46,7 +47,6 @@ def send_a_thank_you():
 
     # maintain a donor list which contains donor names only
     donors = [d.lower() for d in donor_db.keys()]
-    name = ""
 
     while True:
         name = input("Who do you want to send this to, use a full name: ")
@@ -80,7 +80,9 @@ def send_a_thank_you():
 def send_letters_to_all():
     for name in donor_db:
         try:
-            with open(os.path.join(os.getcwd(), f"{name}.txt"), "w") as file:
+            # replace whitespace , * < > / \ ? % : | " . with underscore _
+            file_name = re.sub(r'[\s+|,|*|<|>|/|\\|?|%|:|\||"|.]', '_', name)
+            with open(os.path.join(os.getcwd(), f"{file_name}.txt"), "w") as file:
                 # Take the last donation made by the donor
                 file.write(format_letter().format(name=name, amount=donor_db[name][-1]))
         except FileNotFoundError as fnf_error:
@@ -88,7 +90,7 @@ def send_letters_to_all():
 
 def create_a_report():
     header = "Donor Name                | Total Given | Num Gifts | Average Gift"
-    line   = "------------------------------------------------------------------"  
+    line = "------------------------------------------------------------------"  
     print(header)
     print(line)
 
@@ -96,7 +98,10 @@ def create_a_report():
     donor_names_sorted = sorted(donor_db, key=lambda name:sum(donor_db[name]), reverse=True)
 
     for name in donor_names_sorted:
-        print("{:26} ${:12.2f} {:10d} ${:13.2f}".format(name, sum(donor_db[name]), len(donor_db[name]), sum(donor_db[name]) / len(donor_db[name])))
+        print("{:26} ${:12.2f} {:10d} ${:13.2f}".format(name, 
+                                                        sum(donor_db[name]), 
+                                                        len(donor_db[name]), 
+                                                        sum(donor_db[name]) / len(donor_db[name])))
 
 def exit_program():
     print("Bye!")
@@ -111,9 +116,9 @@ def main():
             print(f"You got an error {ex}. Please choose 1-4!")
 
 choice_dict = {"1":send_a_thank_you,
-                "2":create_a_report,
-                "3":send_letters_to_all,
-                "4":exit_program}
+               "2":create_a_report,
+               "3":send_letters_to_all,
+               "4":exit_program}
 
 if __name__ == "__main__":
     # don't forget this block to guard against your code running automatically if this module is imported

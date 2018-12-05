@@ -1,0 +1,9 @@
+[
+  "test_mailroom.py::test_data_import",
+  "test_mailroom.py::test_generate_letter_single_donation",
+  "test_mailroom.py::test_generate_letter_multi_donation",
+  "test_mailroom.py::test_send_ty_new_donor",
+  "test_mailroom.py::test_send_ty_existing_donor",
+  "test_mailroom.py::test_send_letters",
+  "test_mailroom.py::test_create_report"
+]

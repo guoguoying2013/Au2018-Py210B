@@ -54,14 +54,14 @@
 * Extending an existing class (e.g., adding new attributes/methods)
     ``` Python
     class A:
-        def methodA(self):
+        def method1(self):
             ...
     class B(A):
-        def methodB(self):
+        def method2(self):
             ...
     b = B()
-    b.methodA()  # b (a B instance) now has both A's methods and B's methods)
-    b.methodB()
+    b.method1()  # b (an instance of class B) now has both A's methods and B's methods
+    b.method2()
     ```
 
 * Overriding some parts of an existing class (replace the superclass definition)
@@ -73,7 +73,7 @@
         def method1(self):
             print('method1 in class B')
     b = B()
-    b.methodA()  # Will print 'method1 in class B'. A.method1() is overriden (hidden) by B.method1()
+    b.method1()  # Will print 'method1 in class B'. A.method1() is overriden (hidden) by B.method1()
     ```
   * Must be the same signature (same method name, same parameter list)
   * Can call the overriden superclass method from the overriding subclass method:
@@ -83,10 +83,10 @@
             print('method1 in class A')
     class B(A):
         def method1(self):
-            A.print(self)
+            A.method1(self)
             print('method1 in class B')
     b = B()
-    b.methodA()  # Will print 'method1 in class A\nmethod1 in class B'. A.method1() is called from B.method1()
+    b.method1()  # Will print 'method1 in class A\nmethod1 in class B'. A.method1() is called from B.method1()
     ```
   * There's a complicated method resolution scheme that'll be covered in Lesson 9.
 

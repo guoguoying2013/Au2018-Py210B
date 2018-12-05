@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+""" Except excerise_Lesson5:  by Arun"""
 
 """
 An exercise in playing with Exceptions.
@@ -26,9 +27,6 @@ try:
     print (not_joke)
 except SyntaxError:
     print('Run Away!')
-#else:
-#    print (not_joke)
-
 
 # What did that do? You can think of else in this context, as well as in
 # loops as meaning: "else if nothing went wrong"
@@ -48,21 +46,10 @@ except SyntaxError:
 
 langs = ['java', 'c', 'python']
 try:
-    more_joke = more_fun(langs[1])
+    more_joke = more_fun(langs[0])
 except IndexError:
-    print ('Check for indexing')
-#else:
-#    more_joke = more_fun(langs[2])
+    more_joke = more_fun(langs[1])
+else:
+    more_joke = more_fun(langs[-1])
 finally:
     last_fun()
-
-
-
-
-
-
-
-
-
-
-

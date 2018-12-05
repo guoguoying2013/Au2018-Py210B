@@ -12,7 +12,3 @@ for num in nums:
         print (num)
 print ()      
 print ('Done')
-
-
-
-

@@ -1,5 +1,5 @@
 #!usr/bin/env python
-donors_list = [('Aron King', [1,2]), ('Becky Patty',[3000,1000]), ('Charlie Lee',[666,222]),('Thomas Dave',[202,90,450]),('Nancy Crow',[100,200,300])]
+donors_list = [('Aron King', [1,2]), ('Becky Patty', [3000,1000]), ('Charlie Lee', [666,222]), ('Thomas Dave',[202,90,450]), ('Nancy Crow',[100,200,300])]
 
 def thanks_email(seq):
     while True:
@@ -12,9 +12,9 @@ def thanks_email(seq):
                 if name_input == seq[i][0]:
                     donation_amount = float(input('Enter donation amount: '))
                     seq[i][1].append(donation_amount)
-                    print("Dear {},\n\nThis message is regarding the recent donation of ${:.2f} you made to ZYX charity.\n"
-                            "We highly appreciate your kindness. Till date you have donate a total of ${:.2f}.\n\n"
-                            "With Regards\n\nXYZ\n".format(name_input, donation_amount, sum(seq[i][1])))
+                    print("Dear {},\n\nThis message is regarding the recent donation of ${:.2f} you made to "
+                          "ZYX charity.\nWe highly appreciate your kindness. Till date you have donate a total of"
+                          " ${:.2f}.\n\nWith Regards\n\nXYZ\n".format(name_input, donation_amount, sum(seq[i][1])))
                     return seq
             else:
                 donation_amount = float(input('Enter donation amount: '))
@@ -38,20 +38,21 @@ def create_report(seq):
     print('_ ' * 40)
     print ('End of Report\n')
 
-def quit_program(seq):
+def quit_program():
     print ('Thank for using this script.\nHave a nice day\nBye\n')
     exit()
 def main (seq):
     while True:
         response = input("MAIN MENU\nDonors and donations made to XYZ organisation.\nPlease select one "
-                         "of the option below to proceed.\n1.Send a Thank you message to the donor\n2.Create a report\n3. Quit\n>>>")  # continuously collect user selection
+                         "of the option below to proceed.\n1.Send a Thank you message to the donor\n2.Create a "
+                         "report\n3. Quit\n>>>")  # continuously collect user selection
         # now redirect to feature functions based on the user selection
         if response == "1":
             thanks_email(seq)
         elif response == "2":
             create_report(seq)
         elif response == "3":
-            quit_program(seq)
+            quit_program()
             break
         else:
             print("Not a valid option!")
