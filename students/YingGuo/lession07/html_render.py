@@ -11,60 +11,17 @@ class Element():
     indent = "    "
 
     def __init__(self, content=None, **kwargs):
-        if content is None:
-            self.content = []
-        if content is not None:
-            self.content = [content]
+        self.content = [] if content is None else [content]
         self.kwargs = kwargs 
 
 
     def append(self, new_content):
         self.content.append(new_content)
-
-    def write_html(self):
-        with open("output_html","w") as f:
-             f.write(self.content)
              
     #what does ind mean in the test_html? why it is needed?
     def render(self, out_file, cur_ind=""):
         if cur_ind:
             out_file.write(cur_ind)
-        else:
-            pass
-
-        for content in self.content:
-            out_file.write("<{}>\n".format(self.tag_name))
-
-            if cur_ind:
-                out_file.write(cur_ind)
-            else:
-                pass
-            #
-            out_file.write(self.indent)
-            try:
-                content.render(out_file)
-            except AttributeError:
-                out_file.write(content)
-            out_file.write("\n")
-            
-            out_file.write("</{}>\n".format(self.tag_name))
-
-
-#a subclass of Element with tag body
-class Body(Element):
-    tag_name = "body"
-    indent = "    "*2
-
-#subclass for paragraph
-class P(Element):
-    tag_name = "p"
-    indent = "    "*3
-
-    def render(self, out_file, cur_ind=""):
-        if cur_ind:
-            out_file.write(cur_ind)
-        else:
-            pass
 
         for content in self.content:
             if self.kwargs is not None:
@@ -75,9 +32,14 @@ class P(Element):
                     open_tag.append('"{}"'.format(self.kwargs[x]))
                     open_tag.append(" ")
                 open_tag.append(">\n")
+                if cur_ind:
+                    out_file.write(cur_ind)
                 out_file.write("".join(open_tag))
             else:
                 pass
+
+            if cur_ind:
+                out_file.write(cur_ind)
 
             out_file.write(self.indent)
 
@@ -86,7 +48,20 @@ class P(Element):
             except AttributeError:
                 out_file.write(content)
             out_file.write("\n")
+            
+            if cur_ind:
+                out_file.write(cur_ind)
+
             out_file.write("</{}>\n".format(self.tag_name))
+
+
+#a subclass of Element with tag body
+class Body(Element):
+    tag_name = "body"
+
+#subclass for paragraph
+class P(Element):
+    tag_name = "p"
 
 class Html(Element):
     tag_name = "html"
