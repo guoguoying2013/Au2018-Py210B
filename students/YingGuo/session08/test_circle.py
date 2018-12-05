@@ -1,6 +1,7 @@
 from circle import Circle
 from math import pi
 from circle import Sphere
+import pytest
 
 def test_initiation():
     example = Circle(2)
@@ -22,10 +23,10 @@ def test_area():
     assert example.area == 4*pi
 
 #The test below i got invalid syntax. why is that?
-"""def test_area_attribute():
+def test_area_attribute():
     example = Circle(2)
-    with pytest.raises(AttributeError)
-        example.area = 8"""
+    with pytest.raises(AttributeError):
+        example.area = 8
 
 def test_re_construct():
     assert Circle.re_construct(8) == 4 
