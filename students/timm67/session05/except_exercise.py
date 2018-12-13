@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """
 An exercise in playing with Exceptions.
@@ -24,7 +24,7 @@ try:
     not_joke = fun(first_try[2])
 except SyntaxError:
     print('Run Away!')
-else:
+finally:
     print(not_joke)
 
 # What did that do? You can think of else in this context, as well as in
@@ -45,8 +45,13 @@ else:
 
 langs = ['java', 'c', 'python']
 
+
 try:
     more_joke = more_fun(langs[0])
+except NameError:
+    more_joke = more_fun(langs[1])
 except IndexError:
+    more_joke = more_fun(langs[1])
+finally:
     more_joke = more_fun(langs[2])
-    last_fun()
+

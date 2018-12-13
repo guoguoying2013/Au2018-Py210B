@@ -1,4 +1,4 @@
-#!/usr/bin/env/python3
+#!/usr/bin/env python3
 
 """
 Tim Meese
@@ -105,7 +105,6 @@ def print_menu():
     print("[2] Create a report")
     print("[3] Send letters to all donors")
     print("[9] Exit Mailroom")
-    pass
 
 
 def exit_mail():
@@ -122,17 +121,17 @@ task_dict = {
 
 
 def main():
-    while(exitMail is False):
+    while not exitMail:
         print_menu()
         response = input("Enter Mailroom Option: ")
         try:
             response = int(response)
-        except(ValueError):
+        except ValueError:
             print("Enter a number between 1-9")
             continue
         try:
             task_dict[response]()
-        except(KeyError):
+        except KeyError:
             print("Please enter a correct task number")
 
 if __name__ == "__main__":
