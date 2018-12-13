@@ -40,7 +40,9 @@ class Donor:
         return "|{:>12}|{:>12}|{:>12}|{}|".format(self.__name, self.total_donations, self.avg_donation, self.__donations)
 
     def thank_you(self):
-        print("Dear {},\n Thank you for your donation of {}!\n".format(self.__name, self.__donations))
+        message = "Dear {},\n Thank you for your donation of {}!\n".format(self.__name, self.__donations)
+        print(message)
+        return(message)
 
 
 class DonorCollection:
@@ -71,6 +73,10 @@ class DonorCollection:
         for donor in self.__donors.values():
             donor.thank_you()
 
+    def write_to_file(self):
+        for name in self.__donors.keys():
+            with open(name,"w") as f:
+                f.write(self.__donors[name].thank_you())
 
 if __name__ == "__main__":
     dc = DonorCollection()
