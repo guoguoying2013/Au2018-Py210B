@@ -165,8 +165,7 @@ class Li(OneLineTag):
             for x in self.kwargs:
                 open_tag.append(x)
                 open_tag.append("=")
-                open_tag.append('"{}"'.format(self.kwargs[x]))
-                open_tag.append(">{}".format(self.content[0]))
+                open_tag.append('"{}">'.format(self.kwargs[x]))
                 out_file.write("".join(open_tag))
         else:
             open_tag.append(">")
