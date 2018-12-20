@@ -147,7 +147,7 @@ class A(OneLineTag):
         else:
             out_file.write("".join(open_tag))
 
-        out_file.write("</{}>\n".format(self.tag_name))
+        out_file.write("</{}>".format(self.tag_name))
 
 class H(OneLineTag):
     def __init__(self, level, content=None, **kwargs):
@@ -171,6 +171,12 @@ class Li(OneLineTag):
         else:
             open_tag.append(">")
             out_file.write("".join(open_tag))
+
+        for content in self.content:
+            try:
+                content.render(out_file)
+            except AttributeError:
+                out_file.write(content)
 
         out_file.write("</{}>\n".format(self.tag_name))
     

@@ -261,7 +261,7 @@ def test_achor():
     file_contents = render_result(a)
     print(file_contents)
     assert file_contents.startswith("<a ")
-    assert file_contents == '<a href="http://google.com">link to google</a>\n'
+    assert file_contents == '<a href="http://google.com">link to google</a>'
 
 #what a header look like?
 def test_hearder():
